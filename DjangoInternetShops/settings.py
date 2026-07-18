@@ -94,24 +94,36 @@ WSGI_APPLICATION = "DjangoInternetShops.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+# "default": {
+#     "ENGINE": "django.db.backends.postgresql",
+#     "NAME": "internet_db",
+#     "USER": "postgres",
+#     "PASSWORD": "islam0203",
+#     "HOST": "db",
+#     "PORT": "5432",
+# }
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "internet_db",
-        "USER": "postgres",
-        "PASSWORD": "islam0203",
-        "HOST": "db",
-        "PORT": "5432",
+        "NAME": os.getenv("PGDATABASE"),
+        "USER": os.getenv("PGUSER"),
+        "PASSWORD": os.getenv("PGPASSWORD"),
+        "HOST": os.getenv("PGHOST"),
+        "PORT": os.getenv("PGPORT"),
     }
-    # "default": {
-    #     "ENGINE": "django.db.backends.postgresql",
-    #     "NAME": os.getenv("DB_NAME"),
-    #     "USER": os.getenv("DB_USER"),
-    #     "PASSWORD": os.getenv("DB_PASSWORD"),
-    #     "HOST": os.getenv("DB_HOST"),
-    #     "PORT": os.getenv("DB_PORT"),
-    # }
 }
+
+
+# "default": {
+#     "ENGINE": "django.db.backends.postgresql",
+#     "NAME": os.getenv("DB_NAME"),
+#     "USER": os.getenv("DB_USER"),
+#     "PASSWORD": os.getenv("DB_PASSWORD"),
+#     "HOST": os.getenv("DB_HOST"),
+#     "PORT": os.getenv("DB_PORT"),
+# }
 
 
 # Password validation
