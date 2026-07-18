@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+
+# Environment variables
+.env
+
+# SQLite
+db.sqlite3
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Static files
+staticfiles/
+
+# Media
+media/
+
+.dockerignore
+
+# Pytest
+.pytest_cache/
+
+# Migrations (не удаляем __init__.py)
+*/migrations/*
+!*/migrations/__init__.py
