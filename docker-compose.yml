@@ -3,9 +3,7 @@ version: "3.9"
 services:
   db:
     image: postgres:16
-
     container_name: internet_shops_db
-
     restart: always
 
     environment:
@@ -18,6 +16,14 @@ services:
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: internet_shops_redis
+    restart: always
+
+    ports:
+      - "6379:6379"
 
   web:
     build: .
@@ -39,6 +45,44 @@ services:
 
     depends_on:
       - db
+      - redis
+
+    environment:
+      REDIS_URL: redis://redis:6379/0
+
+  celery:
+    build: .
+
+    container_name: internet_shops_celery
+
+    command: celery -A DjangoInternetShops worker -l info
+
+    volumes:
+      - .:/app
+
+    depends_on:
+      - db
+      - redis
+
+    environment:
+      REDIS_URL: redis://redis:6379/0
+
+  celery-beat:
+    build: .
+
+    container_name: internet_shops_celery_beat
+
+    command: celery -A DjangoInternetShops beat -l info
+
+    volumes:
+      - .:/app
+
+    depends_on:
+      - db
+      - redis
+
+    environment:
+      REDIS_URL: redis://redis:6379/0
 
 volumes:
   postgres_data:
