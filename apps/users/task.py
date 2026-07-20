@@ -1,0 +1,7 @@
+from ...DjangoInternetShops.celery import shared_task
+
+
+@shared_task
+def test_task():
+    print("Celery работает!")
+    return "OK"

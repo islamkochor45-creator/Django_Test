@@ -107,8 +107,24 @@ WSGI_APPLICATION = "DjangoInternetShops.wsgi.application"
 
 DATABASES = {"default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))}
 
-CELERY_BROKER_URL = os.getenv("REDIS_URL")
-CELERY_RESULT_BACKEND = os.getenv("REDIS_URL")
+# CELERY_BROKER_URL = os.getenv("REDIS_URL")
+# CELERY_RESULT_BACKEND = os.getenv("REDIS_URL")
+
+CELERY_BROKER_URL = os.getenv(
+    "REDIS_URL",
+    "redis://redis:6379/0",
+)
+
+CELERY_RESULT_BACKEND = os.getenv(
+    "REDIS_URL",
+    "redis://redis:6379/0",
+)
+
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+
+CELERY_TIMEZONE = "UTC"
 
 # "default": {
 #     "ENGINE": "django.db.backends.postgresql",
