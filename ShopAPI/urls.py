@@ -9,5 +9,5 @@ router.register(r"users", RegisterView, basename="user")
 
 urlpatterns = [
     path("tasks/", include(router.urls)),
-    path("create_users", include(router.urls)),
+    path("create_users/", include(router.urls)),
 ]
