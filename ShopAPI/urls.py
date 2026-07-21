@@ -9,5 +9,5 @@ router.register(r"users", UserViewSet, basename="user")
 urlpatterns = [
     path("tasks/", include(router.urls)),
     path("create_users/", RegisterView.as_view()),
+    path("get/"),
 ]
-
