@@ -5,7 +5,7 @@ from .views import UserViewSet, RegisterView
 
 router = DefaultRouter()
 router.register(r"users", UserViewSet, basename="user")
-router.register(r"users", RegisterView, basename="user")
+router.register(r"create_user", RegisterView, basename="create_user")
 
 urlpatterns = [
     path("tasks/", include(router.urls)),
