@@ -197,7 +197,7 @@ REST_FRAMEWORK = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    "myserver-production-67a8.up.railway.app",
+    "https://myserver-production-67a8.up.railway.app",
 ]
 
 
