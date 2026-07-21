@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 
@@ -17,23 +17,17 @@ from .serializers import RegisterSerializer
 from .tasks import send_email_task
 
 
-class RegisterView(APIView):
-    def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+class RegisterView(generics.CreateAPIView):
+    serializer_class = RegisterSerializer
+    permission_classes = [AllowAny]
 
-        email = serializer.validated_data["email"]
-
-        # Создание пользователя
-        # User.objects.create_user(...)
-
-        # Отправка email через Celery
-        send_email_task.delay(email)
-
-        return Response(
-            {"message": "Пользователь создан. Письмо отправлено в очередь."},
-            status=status.HTTP_201_CREATED,
+    def perform_create(self, serializer):
+        user = User.objects.create_user(
+            email=serializer.validated_data["email"],
+            password=serializer.validated_data["password"],
         )
+
+        send_email_task.delay(user.email)
 
 
 class UserViewSet(viewsets.ModelViewSet):
