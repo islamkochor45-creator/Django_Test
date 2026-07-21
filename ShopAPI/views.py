@@ -6,7 +6,7 @@ from rest_framework import status
 
 from rest_framework import viewsets
 
-from django.contrib.auth.models import User
+from apps.users.models import User
 
 # from .serializers import UserSerializer
 # from .tasks import send_email_task
@@ -36,8 +36,10 @@ class RegisterView(APIView):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
     serializer_class = RegisterSerializer
+
+    def get_queryset(self):
+        return User.objects.all()
 
     def perform_create(self, serializer):
         user = serializer.save()
