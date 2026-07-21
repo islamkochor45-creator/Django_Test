@@ -197,7 +197,7 @@ REST_FRAMEWORK = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://djangotest-production-ae4f.up.railway.app:8000",
+    "https://empathetic-kindness-production-7899.up.railway.app",
 ]
 
 
