@@ -21,6 +21,11 @@ class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny]
 
+    class Meta:
+        model = User
+        fields = ["email", "password"]
+        extra_kwargs = {"password": {"write_only": True}}
+
     def perform_create(self, serializer):
         user = User.objects.create_user(
             email=serializer.validated_data["email"],
