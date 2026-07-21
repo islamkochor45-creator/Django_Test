@@ -203,6 +203,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
+DEFAULT_FROM_EMAIL = "islamkochor45@gmail.com"
 
 MEDIA_URL = "/media/"
 
