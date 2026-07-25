@@ -15,6 +15,14 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 # # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+import mimetypes
+
+mimetypes.guess_type("photo.jpg")
+mimetypes.guess_type("photo.jpeg")
+mimetypes.guess_type("photo.png")
+mimetypes.guess_type("photo.jfif")
+
 from pathlib import Path
 import os
 
