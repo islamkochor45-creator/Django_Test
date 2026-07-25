@@ -22,7 +22,7 @@ db.sqlite3
 *.log
 
 # Static files
-staticfiles/
+# staticfiles/
 
 # Media
 media/
