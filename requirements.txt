@@ -23,3 +23,5 @@ celery
 django-filter
 django-jazzmin==3.0.1
 Pillow
+gunicorn
+redis
