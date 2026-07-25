@@ -20,3 +20,4 @@ tzdata==2026.3
 uritemplate==4.2.0
 dj_database_url
 celery
+django-filter
