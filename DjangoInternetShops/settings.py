@@ -225,8 +225,9 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # DEFAULT_FROM_EMAIL = "islamkochor45@gmail.com"
 
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
-MEDIA_URL = "/media/products/"
+
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Internet Shop API",
