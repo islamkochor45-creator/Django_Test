@@ -21,4 +21,5 @@ uritemplate==4.2.0
 dj_database_url
 celery
 django-filter
-jazzmin
+django-jazzmin==3.0.1
+Pillow
