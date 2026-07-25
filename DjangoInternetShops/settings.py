@@ -42,6 +42,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "corsheaders",
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -51,7 +52,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_filters",
     "drf_spectacular",
-    "jazzmin",
     "apps.users",
     "apps.catalog",
     "apps.cart.apps.CartConfig",
