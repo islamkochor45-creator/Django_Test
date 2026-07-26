@@ -133,7 +133,14 @@ AWS_QUERYSTRING_AUTH = False  # Отключаем S3-токены в URL, Bunny
 AWS_S3_SIGNATURE_VERSION = "s3v4"
 
 # Назначаем Bunny.net хранилищем для медиафайлов
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 
 
 DATABASES = {"default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))}
