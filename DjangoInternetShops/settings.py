@@ -253,8 +253,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # DEFAULT_FROM_EMAIL = "islamkochor45@gmail.com"
 
-MEDIA_ROOT = BASE_DIR / "media"
-MEDIA_URL = "/media/"
+# MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
 
 
 SPECTACULAR_SETTINGS = {
