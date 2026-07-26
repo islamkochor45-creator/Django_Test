@@ -120,7 +120,7 @@ WSGI_APPLICATION = "DjangoInternetShops.wsgi.application"
 # Настройки Bunny.net через S3-совместимый интерфейс
 AWS_ACCESS_KEY_ID = "my-django-image"  # Именно имя зоны!
 AWS_SECRET_ACCESS_KEY = "3bf7fe21-7ca0-498b-944fd279553d-61d5-406f"
-AWS_STORAGE_BUCKET_NAME = "Имя_вашей_Storage_Zone"  # Дублируем имя зоны
+AWS_STORAGE_BUCKET_NAME = "my-django-image"  # Дублируем имя зоны
 
 # Подставляем Endpoint. ВАЖНО: Bunny требует протокол https://
 AWS_S3_ENDPOINT_URL = "https://de-s3.storage.bunnycdn.com"
