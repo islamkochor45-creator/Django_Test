@@ -15,14 +15,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 # # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-import mimetypes
-
-mimetypes.guess_type("photo.jpg")
-mimetypes.guess_type("photo.jpeg")
-mimetypes.guess_type("photo.png")
-mimetypes.guess_type("photo.jfif")
-
 from pathlib import Path
 import os
 
@@ -51,6 +43,7 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "corsheaders",
     "jazzmin",
+    "storages",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -122,6 +115,26 @@ WSGI_APPLICATION = "DjangoInternetShops.wsgi.application"
 #     "HOST": "db",
 #     "PORT": "5432",
 # }
+
+
+# Настройки Bunny.net через S3-совместимый интерфейс
+AWS_ACCESS_KEY_ID = "my-django-image"  # Именно имя зоны!
+AWS_SECRET_ACCESS_KEY = "3bf7fe21-7ca0-498b-944fd279553d-61d5-406f"
+AWS_STORAGE_BUCKET_NAME = "Имя_вашей_Storage_Zone"  # Дублируем имя зоны
+
+# Подставляем Endpoint. ВАЖНО: Bunny требует протокол https://
+AWS_S3_ENDPOINT_URL = "https://de-s3.storage.bunnycdn.com"
+
+# Ваш кастомный домен или стандартный b-cdn.net, откуда пользователи будут качать фото
+AWS_S3_CUSTOM_DOMAIN = "my-django-image.b-cdn.net"
+
+# Важные флаги совместимости для Bunny.net
+AWS_QUERYSTRING_AUTH = False  # Отключаем S3-токены в URL, Bunny раздает файлы публично
+AWS_S3_SIGNATURE_VERSION = "s3v4"
+
+# Назначаем Bunny.net хранилищем для медиафайлов
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
 
 DATABASES = {"default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))}
 
