@@ -32,7 +32,7 @@ class AddToCartAPIView(APIView):
 
     def post(self, request):
 
-        product_id = request.data.get("product")
+        product_id = request.data.get("product_id")
 
         quantity = request.data.get("quantity", 1)
 
