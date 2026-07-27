@@ -2,12 +2,13 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from drf_spectacular.utils import extend_schema
 
 from .models import Product
 
 from .models import Cart, CartItem
 
-from .serializers import CartSerializer
+from .serializers import CartSerializer, CartItemSerializer
 
 
 class CartAPIView(generics.RetrieveAPIView):
@@ -21,6 +22,10 @@ class CartAPIView(generics.RetrieveAPIView):
         return self.request.user.cart
 
 
+@extend_schema(
+    request=CartItemSerializer,
+    responses={200: None},
+)
 class AddToCartAPIView(APIView):
 
     permission_classes = [IsAuthenticated]
