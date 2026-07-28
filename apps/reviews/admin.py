@@ -6,6 +6,7 @@ from .models import Review
 @admin.register(Review)
 class ResviewAdmin(admin.ModelAdmin):
     list_display = (
+        "id",
         "user",
         "product",
         "rating",
