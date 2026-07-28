@@ -6,7 +6,7 @@ from drf_spectacular.utils import extend_schema
 
 from .models import Product
 from .models import Cart, CartItem
-from .serializers import CartSerializer, CartItemSerializer
+from .serializers import CartSerializer, AddToCartSerializer
 
 
 class CartAPIView(generics.RetrieveAPIView):
@@ -18,7 +18,7 @@ class CartAPIView(generics.RetrieveAPIView):
 
 
 @extend_schema(
-    request=CartItemSerializer,
+    request=AddToCartSerializer,
     responses={200: None},
 )
 class AddToCartAPIView(APIView):
