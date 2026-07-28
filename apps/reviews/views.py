@@ -33,7 +33,7 @@ class CreateReviewAPIView(APIView):
 
         product_id = request.data.get("product_id")
 
-        product = Product.objects.get(product_id=product_id)
+        product = Product.objects.get(id=product_id)
 
         review = Review.objects.create(
             user=request.user,
