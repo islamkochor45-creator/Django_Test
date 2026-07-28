@@ -21,12 +21,10 @@ class ProductReviewsAPIView(APIView):
         return Response(serializer.data)
 
 
-extend_schema(
+@extend_schema(
     request=CreateReviewSerializer,
     responses=None,
 )
-
-
 class CreateReviewAPIView(APIView):
 
     permission_classes = [IsAuthenticated]
