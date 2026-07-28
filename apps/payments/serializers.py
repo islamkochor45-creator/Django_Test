@@ -18,3 +18,12 @@ class PaymentSerializer(serializers.ModelSerializer):
             "transaction_id",
             "created_at",
         ]
+
+
+class CreatePaymentSerializer(serializers.Serializer):
+    order_id = serializers.IntegerField()
+    method = serializers.ChoiceField(
+        choices=["card", "cash"],  # замени на реальные варианты из модели Payment
+        default="card",
+        required=False,
+    )

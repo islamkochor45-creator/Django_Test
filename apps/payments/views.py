@@ -1,36 +1,61 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from apps.orders.models import Order
 
 from .models import Payment
 
-from .serializers import PaymentSerializer
+from .serializers import CreatePaymentSerializer, PaymentSerializer
+
+# class CreatePaymentAPIView(APIView):
+
+#     permission_classes = [IsAuthenticated]
+
+#     def post(self, request):
+
+#         order_id = request.data.get("order_id")
+
+#         order = Order.objects.get(id=order_id, user=request.user)
+
+#         payment, created = Payment.objects.get_or_create(
+#             order=order,
+#             defaults={
+#                 "amount": order.total_price,
+#                 "method": request.data.get("method", "card"),
+#             },
+#         )
+
+#         serializer = PaymentSerializer(payment)
+
+#         return Response(serializer.data)
 
 
-class CreatePaymentAPIView(APIView):
+class CreatePaymentAPIView(generics.CreateAPIView):
 
     permission_classes = [IsAuthenticated]
+    serializer_class = CreatePaymentSerializer
 
-    def post(self, request):
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-        order_id = request.data.get("order_id")
+        order_id = serializer.validated_data["order_id"]
+        method = serializer.validated_data.get("method", "card")
 
-        order = Order.objects.get(id=order_id, user=request.user)
+        try:
+            order = Order.objects.get(id=order_id, user=request.user)
+        except Order.DoesNotExist:
+            raise NotFound("Заказ не найден")
 
         payment, created = Payment.objects.get_or_create(
             order=order,
-            defaults={
-                "amount": order.total_price,
-                "method": request.data.get("method", "card"),
-            },
+            defaults={"amount": order.total_price, "method": method},
         )
 
-        serializer = PaymentSerializer(payment)
-
-        return Response(serializer.data)
+        output = PaymentSerializer(payment)
+        return Response(output.data, status=status.HTTP_200_OK)
 
 
 class ConfirmPaymentAPIView(APIView):
