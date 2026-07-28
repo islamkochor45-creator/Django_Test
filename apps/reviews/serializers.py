@@ -19,3 +19,9 @@ class ReviewSerializer(serializers.ModelSerializer):
             "created_at",
             "image",
         ]
+
+
+class CreateReviewSerializer(serializers.Serializer):
+    product_id = serializers.IntegerField()
+    rating = serializers.IntegerField(min_value=1, max_value=5)
+    text = serializers.CharField(required=False, allow_blank=True)

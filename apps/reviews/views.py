@@ -1,13 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 
 from apps.catalog.models import Product
 
 from .models import Review
 
-from .serializers import ReviewSerializer
+from .serializers import ReviewSerializer, CreateReviewSerializer
 
 
 class ProductReviewsAPIView(APIView):
@@ -19,6 +19,12 @@ class ProductReviewsAPIView(APIView):
         serializer = ReviewSerializer(reviews, many=True)
 
         return Response(serializer.data)
+
+
+extend_schema(
+    request=CreateReviewSerializer,
+    responses=None,
+)
 
 
 class CreateReviewAPIView(APIView):

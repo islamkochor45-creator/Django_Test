@@ -23,7 +23,7 @@ class PaymentSerializer(serializers.ModelSerializer):
 class CreatePaymentSerializer(serializers.Serializer):
     order_id = serializers.IntegerField()
     method = serializers.ChoiceField(
-        choices=["card", "cash"],  # замени на реальные варианты из модели Payment
+        choices=Payment.PAYMENT_METHODS,
         default="card",
         required=False,
     )
