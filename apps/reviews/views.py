@@ -14,7 +14,7 @@ class ProductReviewsAPIView(APIView):
 
     def get(self, request, product_id):
 
-        reviews = Review.objects.filter(product_id=product_id)
+        reviews = Review.objects.filter(id=product_id)
 
         serializer = ReviewSerializer(reviews, many=True)
 
