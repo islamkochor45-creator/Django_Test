@@ -17,7 +17,6 @@ class ReviewSerializer(serializers.ModelSerializer):
             "rating",
             "text",
             "created_at",
-            "image",
         ]
 
 
