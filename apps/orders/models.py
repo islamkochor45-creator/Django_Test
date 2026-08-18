@@ -4,6 +4,29 @@ from django.db import models
 from apps.catalog.models import Product
 
 
+class OrderChatThread(models.Model):
+    order = models.OneToOneField("Order", on_delete=models.CASCADE, related_name="chat_thread")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Chat for order #{self.order_id}"
+
+
+class OrderChatMessage(models.Model):
+    thread = models.ForeignKey(OrderChatThread, on_delete=models.CASCADE, related_name="messages")
+    sender = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="order_messages",
+    )
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message #{self.id} in order chat"
+
+
 class Order(models.Model):
 
     STATUS_CHOICES = (
