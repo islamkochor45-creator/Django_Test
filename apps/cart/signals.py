@@ -8,7 +8,5 @@ from .models import Cart
 
 @receiver(post_save, sender=User)
 def create_cart(sender, instance, created, **kwargs):
-
     if created:
-
-        Cart.objects.create(user=instance)
+        Cart.objects.get_or_create(user=instance)
